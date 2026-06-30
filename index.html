@@ -1,12 +1,2224 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Landing Advogados</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfólio profissional de Vergilio Júnior, desenvolvedor de landing pages, sistemas de gestão e experiências digitais." />
+  <title>Vergilio Júnior | Portfólio</title>
+  <style>
+    :root {
+      --bg: #020713;
+      --bg-2: #071426;
+      --surface: rgba(10, 24, 42, 0.76);
+      --surface-strong: rgba(13, 31, 52, 0.92);
+      --line: rgba(147, 197, 253, 0.18);
+      --line-strong: rgba(125, 211, 252, 0.34);
+      --text: #f8fbff;
+      --muted: #b8c7d9;
+      --soft: #7890a8;
+      --cyan: #38d4ff;
+      --teal: #42f2c4;
+      --lime: #b7f46d;
+      --blue: #2f82ff;
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.38);
+      --radius: 8px;
+      --container: min(1160px, calc(100% - 40px));
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(180deg, rgba(2, 7, 19, 0.92), rgba(2, 7, 19, 1) 640px),
+        repeating-linear-gradient(90deg, rgba(56, 212, 255, 0.055) 0 1px, transparent 1px 96px),
+        repeating-linear-gradient(0deg, rgba(56, 212, 255, 0.04) 0 1px, transparent 1px 96px),
+        var(--bg);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      background:
+        linear-gradient(120deg, rgba(47, 130, 255, 0.16), transparent 32%),
+        linear-gradient(300deg, transparent 52%, rgba(66, 242, 196, 0.12));
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0.26;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: linear-gradient(to bottom, black, transparent 82%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .container {
+      width: var(--container);
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(147, 197, 253, 0.12);
+      background: rgba(2, 7, 19, 0.78);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(56, 212, 255, 0.42);
+      background:
+        linear-gradient(135deg, rgba(56, 212, 255, 0.2), rgba(66, 242, 196, 0.08)),
+        rgba(7, 20, 38, 0.9);
+      box-shadow: 0 0 34px rgba(56, 212, 255, 0.18);
+      border-radius: var(--radius);
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .brand-text {
+      display: grid;
+      line-height: 1.08;
+    }
+
+    .brand-text strong {
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+
+    .brand-text span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px;
+      border: 1px solid rgba(147, 197, 253, 0.12);
+      background: rgba(7, 20, 38, 0.54);
+      border-radius: var(--radius);
+    }
+
+    .nav-links a {
+      padding: 10px 12px;
+      color: var(--muted);
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: 180ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      background: rgba(56, 212, 255, 0.11);
+    }
+
+    .icon-link,
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      display: inline-grid;
+      place-items: center;
+      color: var(--text);
+      border: 1px solid rgba(147, 197, 253, 0.18);
+      background: rgba(7, 20, 38, 0.62);
+      border-radius: var(--radius);
+      transition: 200ms ease;
+      cursor: pointer;
+    }
+
+    .icon-link:hover,
+    .icon-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 212, 255, 0.52);
+      box-shadow: 0 14px 34px rgba(56, 212, 255, 0.14);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mobile-toggle {
+      display: none;
+    }
+
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 18px;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      font-weight: 850;
+      color: var(--text);
+      overflow: hidden;
+      isolation: isolate;
+      transition: 220ms ease;
+      white-space: nowrap;
+    }
+
+    .btn svg,
+    .icon-link svg,
+    .icon-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2.2;
+    }
+
+    .btn-primary {
+      background:
+        linear-gradient(135deg, rgba(56, 212, 255, 0.98), rgba(66, 242, 196, 0.92));
+      color: #02101d;
+      box-shadow: 0 18px 48px rgba(56, 212, 255, 0.22);
+    }
+
+    .btn-primary::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.46), transparent);
+      transform: translateX(-120%) skewX(-18deg);
+      animation: sheen 5s ease-in-out infinite;
+    }
+
+    .btn-secondary {
+      border-color: rgba(147, 197, 253, 0.22);
+      background: rgba(7, 20, 38, 0.72);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 74px);
+      display: grid;
+      align-items: center;
+      padding: 52px 0 58px;
+      overflow: hidden;
+    }
+
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.82;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(2, 7, 19, 0.98) 0%, rgba(2, 7, 19, 0.84) 46%, rgba(2, 7, 19, 0.5) 100%),
+        linear-gradient(180deg, transparent 0%, rgba(2, 7, 19, 0.72) 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.86fr);
+      gap: 54px;
+      align-items: center;
+    }
+
+    .hero-grid > *,
+    .hero-content {
+      min-width: 0;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 100%;
+      padding: 8px 10px;
+      border: 1px solid rgba(66, 242, 196, 0.28);
+      background: rgba(66, 242, 196, 0.08);
+      color: #dffef7;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 700;
+    }
+
+    .kicker .pulse {
+      width: 9px;
+      height: 9px;
+      border-radius: 3px;
+      background: var(--teal);
+      box-shadow: 0 0 18px rgba(66, 242, 196, 0.8);
+      animation: nodePulse 1.8s ease-in-out infinite;
+      flex: 0 0 auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      overflow-wrap: break-word;
+    }
+
+    h1 {
+      max-width: 860px;
+      margin: 22px 0 0;
+      font-size: clamp(38px, 4.8vw, 60px);
+      line-height: 0.98;
+      letter-spacing: 0;
+      font-weight: 930;
+    }
+
+    .gradient-text {
+      color: transparent;
+      background: linear-gradient(90deg, #ffffff 0%, #a8eaff 38%, #adffdf 78%);
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 20px);
+      line-height: 1.6;
+    }
+
+    .hero-copy strong {
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .status-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 12px;
+      border: 1px solid rgba(147, 197, 253, 0.16);
+      background: rgba(7, 20, 38, 0.62);
+      color: var(--muted);
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .status-chip i {
+      color: var(--teal);
+    }
+
+    .visual-stack {
+      position: relative;
+      min-height: 560px;
+      perspective: 1400px;
+    }
+
+    .terminal-window,
+    .metrics-panel,
+    .profile-panel {
+      position: absolute;
+      border: 1px solid rgba(147, 197, 253, 0.2);
+      border-radius: var(--radius);
+      background: rgba(6, 17, 32, 0.84);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .terminal-window {
+      inset: 34px 0 auto auto;
+      width: min(100%, 470px);
+      padding: 16px;
+      transform: rotateY(-10deg) rotateX(6deg);
+      animation: floatPanel 8s ease-in-out infinite;
+    }
+
+    .window-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(147, 197, 253, 0.12);
+      color: var(--soft);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .window-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      background: var(--soft);
+    }
+
+    .window-dots span:nth-child(1) {
+      background: #ff6a8b;
+    }
+
+    .window-dots span:nth-child(2) {
+      background: #ffd166;
+    }
+
+    .window-dots span:nth-child(3) {
+      background: var(--teal);
+    }
+
+    .code-lines {
+      display: grid;
+      gap: 11px;
+      padding-top: 18px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 13px;
+      color: #d7e8fb;
+    }
+
+    .code-lines span {
+      display: block;
+      min-height: 16px;
+    }
+
+    .code-lines .dim {
+      color: #6f88a4;
+    }
+
+    .code-lines .key {
+      color: var(--cyan);
+    }
+
+    .code-lines .ok {
+      color: var(--teal);
+    }
+
+    .code-lines .warn {
+      color: var(--lime);
+    }
+
+    .metrics-panel {
+      right: 26px;
+      bottom: 36px;
+      width: 320px;
+      padding: 18px;
+      transform: rotateY(-8deg);
+      animation: floatPanel 9s ease-in-out infinite reverse;
+    }
+
+    .metric-chart {
+      height: 120px;
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      align-items: end;
+      gap: 8px;
+      padding: 14px;
+      margin-top: 14px;
+      border: 1px solid rgba(147, 197, 253, 0.12);
+      background: linear-gradient(180deg, rgba(56, 212, 255, 0.09), rgba(66, 242, 196, 0.035));
+      border-radius: var(--radius);
+    }
+
+    .metric-chart span {
+      display: block;
+      height: var(--h);
+      min-height: 18px;
+      border-radius: 4px 4px 2px 2px;
+      background: linear-gradient(180deg, var(--cyan), rgba(66, 242, 196, 0.55));
+      animation: growBars 1.6s ease both;
+      animation-delay: var(--d);
+    }
+
+    .profile-panel {
+      left: 0;
+      bottom: 88px;
+      width: 260px;
+      padding: 18px;
+      transform: rotateY(12deg) rotateX(3deg);
+      animation: floatPanel 7.4s ease-in-out infinite;
+    }
+
+    .profile-card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(66, 242, 196, 0.32);
+      background: linear-gradient(135deg, rgba(56, 212, 255, 0.16), rgba(66, 242, 196, 0.08));
+      border-radius: var(--radius);
+      font-size: 22px;
+      font-weight: 900;
+      box-shadow: inset 0 0 28px rgba(56, 212, 255, 0.1);
+    }
+
+    .mini-title {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 850;
+    }
+
+    .mini-text {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .signal-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .signal {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px;
+      border: 1px solid rgba(147, 197, 253, 0.12);
+      background: rgba(2, 7, 19, 0.4);
+      border-radius: var(--radius);
+      font-size: 12px;
+      color: var(--muted);
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    .signal strong {
+      color: var(--teal);
+    }
+
+    .scroll-cue {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--soft);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .scroll-cue span {
+      width: 1px;
+      height: 34px;
+      overflow: hidden;
+      background: rgba(147, 197, 253, 0.18);
+    }
+
+    .scroll-cue span::after {
+      content: "";
+      display: block;
+      width: 1px;
+      height: 14px;
+      background: var(--cyan);
+      animation: scrollLine 1.5s ease-in-out infinite;
+    }
+
+    .section {
+      padding: 104px 0;
+      position: relative;
+    }
+
+    .section-compact {
+      padding-top: 76px;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(280px, 0.5fr);
+      gap: 34px;
+      align-items: end;
+      margin-bottom: 36px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--teal);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 1px;
+      background: var(--teal);
+    }
+
+    h2 {
+      margin: 12px 0 0;
+      font-size: clamp(30px, 4.8vw, 56px);
+      line-height: 1.02;
+      letter-spacing: 0;
+      font-weight: 920;
+    }
+
+    .section-lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat-card {
+      min-height: 158px;
+      padding: 22px;
+      border: 1px solid rgba(147, 197, 253, 0.16);
+      background: rgba(7, 20, 38, 0.6);
+      border-radius: var(--radius);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::after,
+    .service-card::after,
+    .case-card::after,
+    .process-step::after,
+    .contact-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      background: linear-gradient(120deg, transparent, rgba(56, 212, 255, 0.11), transparent);
+      transform: translateX(-120%);
+      transition: transform 600ms ease;
+    }
+
+    .stat-card:hover::after,
+    .service-card:hover::after,
+    .case-card:hover::after,
+    .process-step:hover::after,
+    .contact-panel:hover::after {
+      transform: translateX(120%);
+    }
+
+    .stat-number {
+      display: block;
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1;
+      font-weight: 950;
+      color: var(--text);
+    }
+
+    .stat-label {
+      display: block;
+      margin-top: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .service-card,
+    .case-card,
+    .process-step,
+    .contact-panel,
+    .about-panel {
+      position: relative;
+      border: 1px solid rgba(147, 197, 253, 0.16);
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.16);
+      overflow: hidden;
+      transition: transform 240ms ease, border-color 240ms ease, background 240ms ease;
+    }
+
+    .service-card {
+      min-height: 270px;
+      padding: 24px;
+    }
+
+    .service-card:hover,
+    .case-card:hover,
+    .process-step:hover,
+    .contact-panel:hover {
+      transform: translateY(-6px);
+      border-color: rgba(56, 212, 255, 0.38);
+      background: rgba(10, 26, 46, 0.88);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      color: var(--teal);
+      border: 1px solid rgba(66, 242, 196, 0.22);
+      background: rgba(66, 242, 196, 0.07);
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+    }
+
+    .service-card h3,
+    .case-card h3,
+    .process-step h3,
+    .contact-panel h3,
+    .about-panel h3 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .service-card p,
+    .case-card p,
+    .process-step p,
+    .contact-panel p,
+    .about-panel p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 9px;
+      color: #ddf7ff;
+      border: 1px solid rgba(147, 197, 253, 0.16);
+      background: rgba(2, 7, 19, 0.42);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .case-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .case-card {
+      padding: 26px;
+    }
+
+    .case-card.featured {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(135deg, rgba(56, 212, 255, 0.11), rgba(66, 242, 196, 0.06)),
+        rgba(7, 20, 38, 0.72);
+    }
+
+    .case-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .case-preview {
+      min-height: 480px;
+      padding: 16px;
+      border: 1px solid rgba(147, 197, 253, 0.16);
+      background: rgba(4, 12, 24, 0.82);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .browser-shell {
+      min-height: 448px;
+      border: 1px solid rgba(147, 197, 253, 0.14);
+      background: #06111f;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .browser-bar {
+      height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 12px;
+      border-bottom: 1px solid rgba(147, 197, 253, 0.12);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .browser-bar .window-dots span {
+      width: 9px;
+      height: 9px;
+    }
+
+    .url-pill {
+      flex: 1;
+      min-width: 0;
+      padding: 8px 10px;
+      color: var(--soft);
+      border: 1px solid rgba(147, 197, 253, 0.1);
+      background: rgba(2, 7, 19, 0.4);
+      border-radius: 6px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .project-shot {
+      height: 405px;
+      display: grid;
+      grid-template-rows: 64px 1fr 92px;
+      background:
+        linear-gradient(120deg, rgba(255, 255, 255, 0.98), rgba(247, 250, 252, 0.98));
+      color: #172033;
+    }
+
+    .shot-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 0 22px;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .shot-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      color: #8d084b;
+    }
+
+    .shot-logo {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: #df3a88;
+      border-radius: 8px;
+    }
+
+    .shot-menu {
+      display: flex;
+      gap: 14px;
+      color: #65758a;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .shot-hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      align-items: center;
+      padding: 28px 26px;
+      background:
+        linear-gradient(135deg, rgba(255, 244, 250, 0.88), rgba(255, 255, 255, 0.98));
+    }
+
+    .shot-hero h4 {
+      margin: 0;
+      color: #7a0a43;
+      font-size: clamp(24px, 3vw, 36px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .shot-hero p {
+      margin: 12px 0 0;
+      color: #667085;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .shot-button {
+      display: inline-flex;
+      margin-top: 15px;
+      padding: 10px 12px;
+      background: linear-gradient(135deg, #8d084b, #52043a);
+      color: white;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .shot-visual {
+      position: relative;
+      min-height: 190px;
+      border: 1px solid rgba(141, 8, 75, 0.12);
+      background:
+        linear-gradient(135deg, #fff, #ffeaf5);
+      border-radius: 8px;
+      box-shadow: 0 20px 42px rgba(82, 4, 58, 0.12);
+      overflow: hidden;
+    }
+
+    .shot-visual::before {
+      content: "";
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 0;
+      height: 72%;
+      background:
+        linear-gradient(180deg, rgba(223, 58, 136, 0.18), rgba(223, 58, 136, 0.04));
+      clip-path: polygon(22% 0, 78% 0, 100% 100%, 0% 100%);
+    }
+
+    .shot-visual::after {
+      content: "UX";
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      color: #8d084b;
+      border: 1px solid rgba(141, 8, 75, 0.18);
+      background: white;
+      border-radius: 8px;
+      font-weight: 950;
+    }
+
+    .shot-services {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 14px 18px;
+      background: white;
+    }
+
+    .shot-service {
+      padding: 12px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 8px;
+    }
+
+    .shot-service strong {
+      display: block;
+      height: 9px;
+      width: 78%;
+      background: #8d084b;
+      border-radius: 4px;
+    }
+
+    .shot-service span {
+      display: block;
+      height: 7px;
+      width: 94%;
+      margin-top: 10px;
+      background: #dbe4ef;
+      border-radius: 4px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.94fr) minmax(340px, 1.06fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .about-panel {
+      padding: 28px;
+      min-height: 100%;
+    }
+
+    .about-panel.main {
+      background:
+        linear-gradient(135deg, rgba(56, 212, 255, 0.09), rgba(183, 244, 109, 0.035)),
+        rgba(7, 20, 38, 0.68);
+    }
+
+    .about-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .about-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid rgba(147, 197, 253, 0.14);
+      background: rgba(2, 7, 19, 0.32);
+      border-radius: var(--radius);
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .about-item i {
+      color: var(--teal);
+      margin-top: 2px;
+      flex: 0 0 auto;
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .skill {
+      padding: 14px;
+      border: 1px solid rgba(147, 197, 253, 0.14);
+      background: rgba(2, 7, 19, 0.34);
+      border-radius: var(--radius);
+    }
+
+    .skill strong {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 13px;
+      color: #eaf6ff;
+    }
+
+    .skill strong span {
+      color: var(--teal);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+    }
+
+    .bar {
+      position: relative;
+      height: 6px;
+      margin-top: 12px;
+      border-radius: 999px;
+      background: rgba(147, 197, 253, 0.14);
+      overflow: hidden;
+    }
+
+    .bar::after {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: var(--value);
+      background: linear-gradient(90deg, var(--cyan), var(--teal));
+      border-radius: inherit;
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 1100ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .is-visible .bar::after {
+      transform: scaleX(1);
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      counter-reset: step;
+    }
+
+    .process-step {
+      min-height: 255px;
+      padding: 24px;
+      counter-increment: step;
+    }
+
+    .step-number {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 20px;
+      color: #02101d;
+      background: linear-gradient(135deg, var(--cyan), var(--teal));
+      border-radius: var(--radius);
+      font-weight: 950;
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: minmax(0, 0.86fr) minmax(320px, 1.14fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .quote-panel {
+      padding: 34px;
+      border: 1px solid rgba(147, 197, 253, 0.16);
+      background:
+        linear-gradient(135deg, rgba(56, 212, 255, 0.09), rgba(66, 242, 196, 0.04)),
+        var(--surface);
+      border-radius: var(--radius);
+      min-height: 100%;
+    }
+
+    .quote-panel blockquote {
+      margin: 0;
+      font-size: clamp(24px, 3.6vw, 42px);
+      line-height: 1.18;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .quote-panel p {
+      margin: 18px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .proof-card {
+      min-height: 178px;
+      padding: 20px;
+      border: 1px solid rgba(147, 197, 253, 0.14);
+      background: rgba(7, 20, 38, 0.62);
+      border-radius: var(--radius);
+    }
+
+    .proof-card i {
+      color: var(--teal);
+    }
+
+    .proof-card strong {
+      display: block;
+      margin-top: 14px;
+      font-size: 18px;
+    }
+
+    .proof-card span {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .contact-section {
+      padding-bottom: 112px;
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.72fr);
+      gap: 28px;
+      align-items: center;
+      padding: clamp(26px, 5vw, 48px);
+      background:
+        linear-gradient(135deg, rgba(56, 212, 255, 0.13), rgba(66, 242, 196, 0.07)),
+        rgba(7, 20, 38, 0.74);
+    }
+
+    .contact-panel h2 {
+      font-size: clamp(34px, 5.2vw, 64px);
+      margin-top: 0;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .contact-card {
+      padding: 20px;
+      border: 1px solid rgba(147, 197, 253, 0.16);
+      background: rgba(2, 7, 19, 0.34);
+      border-radius: var(--radius);
+    }
+
+    .contact-card + .contact-card {
+      margin-top: 12px;
+    }
+
+    .contact-card span {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-weight: 750;
+      line-height: 1.45;
+    }
+
+    .contact-card strong {
+      display: block;
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    .floating-whatsapp {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 60;
+      width: 56px;
+      height: 56px;
+      display: grid;
+      place-items: center;
+      color: #03121d;
+      background: linear-gradient(135deg, var(--teal), var(--cyan));
+      border-radius: var(--radius);
+      box-shadow: 0 20px 55px rgba(66, 242, 196, 0.26);
+      transition: 220ms ease;
+    }
+
+    .floating-whatsapp:hover {
+      transform: translateY(-4px) scale(1.03);
+    }
+
+    .site-footer {
+      border-top: 1px solid rgba(147, 197, 253, 0.12);
+      background: rgba(2, 7, 19, 0.86);
+      padding: 28px 0;
+      color: var(--soft);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-inner strong {
+      color: var(--text);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 760ms ease, transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero .reveal {
+      opacity: 1;
+      transform: none;
+      transition-delay: 0ms;
+    }
+
+    [data-tilt] {
+      transform-style: preserve-3d;
+    }
+
+    @keyframes sheen {
+      0%, 52%, 100% {
+        transform: translateX(-120%) skewX(-18deg);
+      }
+      68% {
+        transform: translateX(120%) skewX(-18deg);
+      }
+    }
+
+    @keyframes nodePulse {
+      0%, 100% {
+        transform: scale(0.84);
+        opacity: 0.72;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes floatPanel {
+      0%, 100% {
+        translate: 0 0;
+      }
+      50% {
+        translate: 0 -16px;
+      }
+    }
+
+    @keyframes growBars {
+      from {
+        transform: scaleY(0.1);
+      }
+      to {
+        transform: scaleY(1);
+      }
+    }
+
+    @keyframes scrollLine {
+      from {
+        transform: translateY(-14px);
+      }
+      to {
+        transform: translateY(34px);
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .case-layout,
+      .about-grid,
+      .testimonials,
+      .contact-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .visual-stack {
+        min-height: 500px;
+      }
+
+      .terminal-window {
+        right: 0;
+      }
+
+      .profile-panel {
+        left: 18px;
+      }
+
+      .metrics-panel {
+        right: 18px;
+      }
+
+      .stats-grid,
+      .process-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 880px) {
+      .mobile-toggle {
+        display: inline-grid;
+      }
+
+      .nav-links {
+        position: fixed;
+        left: 20px;
+        right: 20px;
+        top: 86px;
+        display: grid;
+        gap: 4px;
+        padding: 10px;
+        background: rgba(3, 12, 25, 0.96);
+        box-shadow: var(--shadow);
+        transform: translateY(-12px);
+        opacity: 0;
+        pointer-events: none;
+        transition: 200ms ease;
+      }
+
+      .nav-links.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-links a {
+        padding: 13px 14px;
+      }
+
+      .nav-actions .btn {
+        display: none;
+      }
+
+      .section-header {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .shot-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .project-shot {
+        height: auto;
+      }
+
+      .shot-visual {
+        min-height: 160px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --container: calc(100% - 28px);
+      }
+
+      html,
+      body,
+      main {
+        max-width: 100%;
+        overflow-x: clip;
+      }
+
+      .site-header {
+        position: sticky;
+      }
+
+      .brand-text span {
+        display: none;
+      }
+
+      .nav {
+        min-width: 0;
+      }
+
+      .brand {
+        flex: 1 1 auto;
+      }
+
+      .nav-actions {
+        flex: 0 0 auto;
+      }
+
+      .nav-actions .icon-link {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 58px 0 78px;
+      }
+
+      h1 {
+        max-width: 100%;
+        font-size: 34px;
+        line-height: 1.08;
+      }
+
+      .hero-copy {
+        max-width: 100%;
+        font-size: 16px;
+        line-height: 1.58;
+      }
+
+      .kicker {
+        width: 100%;
+        font-size: 11px;
+      }
+
+      .hero-actions .btn,
+      .contact-actions .btn {
+        width: 100%;
+        white-space: normal;
+        text-align: center;
+      }
+
+      .status-row {
+        display: grid;
+      }
+
+      .visual-stack {
+        min-height: 620px;
+      }
+
+      .terminal-window,
+      .metrics-panel,
+      .profile-panel {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        transform: none;
+        animation: none;
+      }
+
+      .visual-stack {
+        display: grid;
+        gap: 14px;
+      }
+
+      .stats-grid,
+      .services-grid,
+      .process-grid,
+      .skill-grid,
+      .proof-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 76px 0;
+      }
+
+      .case-preview {
+        min-height: 0;
+        padding: 10px;
+      }
+
+      .shot-menu {
+        display: none;
+      }
+
+      .shot-services {
+        grid-template-columns: 1fr;
+      }
+
+      .floating-whatsapp {
+        right: 14px;
+        bottom: 14px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      h1 {
+        font-size: 31px;
+      }
+
+      .kicker {
+        font-size: 10px;
+      }
+
+      .hero {
+        padding-top: 48px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="Início do portfólio">
+        <span class="brand-mark">VJ</span>
+        <span class="brand-text">
+          <strong>Vergilio Júnior</strong>
+          <span>Landing pages & sistemas</span>
+        </span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Navegação principal">
+        <a href="#servicos">Serviços</a>
+        <a href="#case">Case</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#processo">Processo</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="icon-link" href="tel:+5591996233480" aria-label="Ligar para Vergilio Júnior" title="Ligar">
+          <i data-lucide="phone"></i>
+        </a>
+        <a class="btn btn-primary" href="https://wa.me/5591996233480?text=Ol%C3%A1%2C%20Vergilio%21%20Quero%20criar%20uma%20p%C3%A1gina%20ou%20sistema." target="_blank" rel="noopener noreferrer">
+          <i data-lucide="send"></i>
+          Solicitar projeto
+        </a>
+        <button class="icon-btn mobile-toggle" id="menuButton" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="container hero-grid">
+        <div class="hero-content reveal">
+          <div class="kicker"><span class="pulse"></span>Disponível para novos projetos digitais</div>
+          <h1>Sites que fazem clientes pensarem: quero uma página assim.</h1>
+          <p class="hero-copy">
+            Sou <strong>Vergilio Júnior</strong>, 22 anos, estudante de Análise e Desenvolvimento de Sistemas no IFPA. Crio landing pages, portfólios e sistemas de gestão com visual profissional, estratégia comercial e acabamento técnico.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://wa.me/5591996233480?text=Ol%C3%A1%2C%20Vergilio%21%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20uma%20p%C3%A1gina%20profissional." target="_blank" rel="noopener noreferrer">
+              <i data-lucide="message-circle"></i>
+              Chamar no WhatsApp
+            </a>
+            <a class="btn btn-secondary" href="#case">
+              <i data-lucide="external-link"></i>
+              Ver case vendido
+            </a>
+          </div>
+          <div class="status-row" aria-label="Destaques">
+            <span class="status-chip"><i data-lucide="check-circle-2"></i>Landing pages que convertem</span>
+            <span class="status-chip"><i data-lucide="cpu"></i>Interfaces modernas</span>
+            <span class="status-chip"><i data-lucide="smartphone"></i>Responsivo no celular</span>
+          </div>
+        </div>
+
+        <div class="visual-stack reveal" aria-label="Prévia visual tecnológica">
+          <div class="terminal-window" data-tilt>
+            <div class="window-top">
+              <div class="window-dots"><span></span><span></span><span></span></div>
+              <span>portfolio.deploy</span>
+            </div>
+            <div class="code-lines">
+              <span><span class="dim">01</span> <span class="key">const</span> projeto = "presença digital premium";</span>
+              <span><span class="dim">02</span> <span class="key">build</span>({ design: <span class="ok">"elegante"</span>, performance: <span class="ok">"rápida"</span> });</span>
+              <span><span class="dim">03</span> <span class="key">services</span>.add("landing pages");</span>
+              <span><span class="dim">04</span> <span class="key">services</span>.add("sistemas de gestão");</span>
+              <span><span class="dim">05</span> <span class="warn">status</span>: pronto para vender mais.</span>
+            </div>
+          </div>
+
+          <div class="profile-panel" data-tilt>
+            <div class="profile-card-top">
+              <div class="avatar">VJ</div>
+              <div>
+                <p class="mini-title">Vergilio Júnior</p>
+                <p class="mini-text">ADS no IFPA • 22 anos</p>
+              </div>
+            </div>
+            <div class="signal-list">
+              <div class="signal"><span>Design</span><strong>Premium</strong></div>
+              <div class="signal"><span>Código</span><strong>Limpo</strong></div>
+              <div class="signal"><span>Entrega</span><strong>Foco</strong></div>
+            </div>
+          </div>
+
+          <div class="metrics-panel" data-tilt>
+            <p class="mini-title">Projetos com direção comercial</p>
+            <p class="mini-text">Arquitetura visual para gerar confiança, explicar a oferta e levar o visitante ao contato.</p>
+            <div class="metric-chart" aria-hidden="true">
+              <span style="--h: 36%; --d: 0ms"></span>
+              <span style="--h: 48%; --d: 80ms"></span>
+              <span style="--h: 42%; --d: 160ms"></span>
+              <span style="--h: 66%; --d: 240ms"></span>
+              <span style="--h: 58%; --d: 320ms"></span>
+              <span style="--h: 76%; --d: 400ms"></span>
+              <span style="--h: 82%; --d: 480ms"></span>
+              <span style="--h: 70%; --d: 560ms"></span>
+              <span style="--h: 92%; --d: 640ms"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#servicos" aria-label="Ir para serviços">
+        Scroll
+        <span></span>
+      </a>
+    </section>
+
+    <section class="section section-compact" id="servicos">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <span class="eyebrow">O que posso vender para clientes</span>
+            <h2>Experiências digitais que parecem empresa grande, mesmo quando o negócio ainda está começando.</h2>
+          </div>
+          <p class="section-lead">A página posiciona você como solução para profissionais, clínicas, prestadores de serviço e empresas locais que precisam vender mais com presença digital.</p>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card reveal">
+            <span class="stat-number" data-count="100">0</span>
+            <span class="stat-label">layout responsivo pensado para desktop, tablet e celular</span>
+          </article>
+          <article class="stat-card reveal">
+            <span class="stat-number" data-count="7">0</span>
+            <span class="stat-label">tipos de soluções digitais para oferecer aos clientes</span>
+          </article>
+          <article class="stat-card reveal">
+            <span class="stat-number" data-count="1">0</span>
+            <span class="stat-label">case real vendido e publicado como prova de confiança</span>
+          </article>
+          <article class="stat-card reveal">
+            <span class="stat-number">24h</span>
+            <span class="stat-label">estrutura pronta para captar contatos pelo WhatsApp</span>
+          </article>
+        </div>
+
+        <div class="services-grid" style="margin-top: 18px;">
+          <article class="service-card reveal" data-tilt>
+            <div class="service-icon"><i data-lucide="layout-template"></i></div>
+            <h3>Landing pages de alta conversão</h3>
+            <p>Páginas para campanhas, profissionais autônomos, clínicas, eventos, lançamentos e serviços locais.</p>
+            <div class="service-tags"><span class="tag">CTA</span><span class="tag">WhatsApp</span><span class="tag">SEO básico</span></div>
+          </article>
+
+          <article class="service-card reveal" data-tilt>
+            <div class="service-icon"><i data-lucide="panels-top-left"></i></div>
+            <h3>Sites institucionais e portfólios</h3>
+            <p>Presença digital com identidade, seções bem organizadas, prova social, serviços e contato direto.</p>
+            <div class="service-tags"><span class="tag">Marca</span><span class="tag">Credibilidade</span><span class="tag">Mobile</span></div>
+          </article>
+
+          <article class="service-card reveal" data-tilt>
+            <div class="service-icon"><i data-lucide="database-zap"></i></div>
+            <h3>Sistemas de gestão</h3>
+            <p>Controle de clientes, atendimentos, estoque, financeiro, pedidos, agenda e relatórios internos.</p>
+            <div class="service-tags"><span class="tag">Painel</span><span class="tag">CRUD</span><span class="tag">Relatórios</span></div>
+          </article>
+
+          <article class="service-card reveal" data-tilt>
+            <div class="service-icon"><i data-lucide="bar-chart-3"></i></div>
+            <h3>Dashboards e indicadores</h3>
+            <p>Telas administrativas para acompanhar vendas, desempenho, atendimentos e dados importantes.</p>
+            <div class="service-tags"><span class="tag">Métricas</span><span class="tag">Gráficos</span><span class="tag">Gestão</span></div>
+          </article>
+
+          <article class="service-card reveal" data-tilt>
+            <div class="service-icon"><i data-lucide="shopping-bag"></i></div>
+            <h3>Catálogos e vitrines digitais</h3>
+            <p>Apresentação profissional de produtos e serviços, com botão de orçamento e contato simplificado.</p>
+            <div class="service-tags"><span class="tag">Produtos</span><span class="tag">Orçamento</span><span class="tag">Vendas</span></div>
+          </article>
+
+          <article class="service-card reveal" data-tilt>
+            <div class="service-icon"><i data-lucide="workflow"></i></div>
+            <h3>Automações e integrações</h3>
+            <p>Formulários, captação de leads, mensagens, planilhas, fluxos internos e pequenas integrações.</p>
+            <div class="service-tags"><span class="tag">Leads</span><span class="tag">Rotina</span><span class="tag">Processos</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="case">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <span class="eyebrow">Case vendido com sucesso</span>
+            <h2>Um site real como prova: projeto publicado para cliente na área da saúde.</h2>
+          </div>
+          <p class="section-lead">A referência comercial entra no portfólio como demonstração de capacidade: layout responsivo, hierarquia clara, serviços, localização, avaliações e CTA para agendamento.</p>
+        </div>
+
+        <div class="case-layout">
+          <article class="case-card featured reveal">
+            <div>
+              <span class="tag">Projeto publicado</span>
+              <h3 style="margin-top: 18px;">Landing page para clínica odontológica</h3>
+              <p>Site criado e vendido para cliente, com foco em transmitir confiança, explicar serviços e facilitar o contato pelo WhatsApp.</p>
+              <div class="case-meta">
+                <span class="tag">Design comercial</span>
+                <span class="tag">Responsivo</span>
+                <span class="tag">Prova social</span>
+                <span class="tag">CTA direto</span>
+              </div>
+            </div>
+            <div class="hero-actions" style="margin-top: 22px;">
+              <a class="btn btn-primary" href="https://drmariacissa.vercel.app" target="_blank" rel="noopener noreferrer">
+                <i data-lucide="arrow-up-right"></i>
+                Abrir site do case
+              </a>
+            </div>
+          </article>
+
+          <div class="case-preview reveal" data-tilt>
+            <div class="browser-shell">
+              <div class="browser-bar">
+                <div class="window-dots"><span></span><span></span><span></span></div>
+                <div class="url-pill">https://drmariacissa.vercel.app</div>
+              </div>
+              <div class="project-shot" aria-label="Representação visual do case vendido">
+                <div class="shot-nav">
+                  <div class="shot-brand"><span class="shot-logo">M</span> Drª Maria da Conceição</div>
+                  <div class="shot-menu"><span>Tratamentos</span><span>Sobre</span><span>Contato</span></div>
+                </div>
+                <div class="shot-hero">
+                  <div>
+                    <h4>Cuide do seu sorriso com conforto e segurança.</h4>
+                    <p>Estrutura comercial com apresentação de serviços, diferenciais, prova social e botão de agendamento.</p>
+                    <span class="shot-button">Agendar pelo WhatsApp</span>
+                  </div>
+                  <div class="shot-visual"></div>
+                </div>
+                <div class="shot-services">
+                  <div class="shot-service"><strong></strong><span></span><span style="width: 70%"></span></div>
+                  <div class="shot-service"><strong style="width: 62%"></strong><span></span><span style="width: 82%"></span></div>
+                  <div class="shot-service"><strong style="width: 72%"></strong><span></span><span style="width: 64%"></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sobre">
+      <div class="container">
+        <div class="about-grid">
+          <article class="about-panel main reveal">
+            <span class="eyebrow">Sobre mim</span>
+            <h2>Um desenvolvedor em formação com olhar de produto e obsessão por acabamento.</h2>
+            <p>Tenho 22 anos e estudo Análise e Desenvolvimento de Sistemas no IFPA. Meu foco é transformar ideias em páginas, sistemas e interfaces que sejam bonitas, rápidas e fáceis de vender para o cliente final.</p>
+            <div class="about-list">
+              <div class="about-item"><i data-lucide="graduation-cap"></i><span>Estudante de Análise e Desenvolvimento de Sistemas no IFPA.</span></div>
+              <div class="about-item"><i data-lucide="sparkles"></i><span>Crio experiências com visual moderno, transições suaves e direção comercial.</span></div>
+              <div class="about-item"><i data-lucide="phone-call"></i><span>Contato direto: <strong style="color: var(--text);">(91) 99623-3480</strong>.</span></div>
+            </div>
+          </article>
+
+          <article class="about-panel reveal">
+            <span class="eyebrow">Competências</span>
+            <h3>Base técnica para entregar páginas e sistemas com aparência profissional.</h3>
+            <p>O foco do portfólio é mostrar maturidade visual, organização e capacidade de criar soluções vendáveis.</p>
+            <div class="skill-grid">
+              <div class="skill"><strong>Interface e UI <span>92%</span></strong><div class="bar" style="--value: 92%"></div></div>
+              <div class="skill"><strong>HTML/CSS/JS <span>90%</span></strong><div class="bar" style="--value: 90%"></div></div>
+              <div class="skill"><strong>Responsividade <span>95%</span></strong><div class="bar" style="--value: 95%"></div></div>
+              <div class="skill"><strong>Estratégia de CTA <span>88%</span></strong><div class="bar" style="--value: 88%"></div></div>
+              <div class="skill"><strong>Sistemas de gestão <span>84%</span></strong><div class="bar" style="--value: 84%"></div></div>
+              <div class="skill"><strong>Experiência do usuário <span>91%</span></strong><div class="bar" style="--value: 91%"></div></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="processo">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <span class="eyebrow">Como o projeto acontece</span>
+            <h2>Processo claro, visual forte e entrega pensada para gerar resultado.</h2>
+          </div>
+          <p class="section-lead">Essa estrutura ajuda o cliente a entender que contratar você não é só comprar uma página, é construir uma presença digital com intenção.</p>
+        </div>
+
+        <div class="process-grid">
+          <article class="process-step reveal">
+            <span class="step-number">01</span>
+            <h3>Diagnóstico</h3>
+            <p>Entendimento do negócio, público, objetivo da página e tipo de contato que o cliente deseja receber.</p>
+          </article>
+          <article class="process-step reveal">
+            <span class="step-number">02</span>
+            <h3>Arquitetura</h3>
+            <p>Definição de seções, texto, hierarquia visual, CTAs e caminho ideal para convencer o visitante.</p>
+          </article>
+          <article class="process-step reveal">
+            <span class="step-number">03</span>
+            <h3>Design e código</h3>
+            <p>Construção da interface com responsividade, animações elegantes e acabamento tecnológico.</p>
+          </article>
+          <article class="process-step reveal">
+            <span class="step-number">04</span>
+            <h3>Publicação</h3>
+            <p>Entrega pronta para divulgar, com link, botões de contato e ajustes finais de apresentação.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="testimonials">
+          <div class="quote-panel reveal">
+            <span class="eyebrow">Mensagem que a página precisa passar</span>
+            <blockquote>"Quero uma página criada por ele, porque ele sabe transformar uma ideia em algo profissional."</blockquote>
+            <p>Esse portfólio foi desenhado para causar exatamente essa percepção: talento, segurança técnica e capacidade de entregar algo que ajuda o cliente a vender.</p>
+          </div>
+          <div class="proof-grid">
+            <article class="proof-card reveal">
+              <i data-lucide="shield-check"></i>
+              <strong>Confiança visual</strong>
+              <span>Contraste forte, tipografia limpa, espaçamento consistente e aparência premium.</span>
+            </article>
+            <article class="proof-card reveal">
+              <i data-lucide="rocket"></i>
+              <strong>Impacto imediato</strong>
+              <span>Hero tecnológico, animações suaves e estrutura pronta para apresentar valor rápido.</span>
+            </article>
+            <article class="proof-card reveal">
+              <i data-lucide="mouse-pointer-click"></i>
+              <strong>Contato fácil</strong>
+              <span>Botões diretos para WhatsApp e telefone, sem fricção para iniciar orçamento.</span>
+            </article>
+            <article class="proof-card reveal">
+              <i data-lucide="scan-search"></i>
+              <strong>Escaneável</strong>
+              <span>Serviços, case, processo e perfil organizados para leitura rápida no celular.</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contato">
+      <div class="container">
+        <div class="contact-panel reveal">
+          <div>
+            <span class="eyebrow">Vamos criar algo forte</span>
+            <h2>Seu cliente precisa olhar e sentir: "eu quero isso para o meu negócio".</h2>
+            <p class="section-lead">Entre em contato para criar landing pages, portfólios, catálogos, dashboards ou sistemas de gestão com visual profissional.</p>
+            <div class="contact-actions">
+              <a class="btn btn-primary" href="https://wa.me/5591996233480?text=Ol%C3%A1%2C%20Vergilio%21%20Quero%20fazer%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer">
+                <i data-lucide="message-circle"></i>
+                Fazer orçamento
+              </a>
+              <a class="btn btn-secondary" href="tel:+5591996233480">
+                <i data-lucide="phone"></i>
+                Ligar agora
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div class="contact-card">
+              <span><i data-lucide="user"></i> Desenvolvedor</span>
+              <strong>Vergilio Júnior</strong>
+            </div>
+            <div class="contact-card">
+              <span><i data-lucide="graduation-cap"></i> Formação</span>
+              <strong>ADS no IFPA</strong>
+            </div>
+            <div class="contact-card">
+              <span><i data-lucide="phone"></i> WhatsApp</span>
+              <strong>(91) 99623-3480</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span><strong>Vergilio Júnior</strong> • Portfólio profissional</span>
+      <span>Landing pages • Sistemas • Interfaces digitais</span>
+    </div>
+  </footer>
+
+  <a class="floating-whatsapp" href="https://wa.me/5591996233480?text=Ol%C3%A1%2C%20Vergilio%21%20Quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer" aria-label="Chamar Vergilio Júnior no WhatsApp" title="WhatsApp">
+    <i data-lucide="message-circle"></i>
+  </a>
+
+  <script>
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const iconPaths = {
+      "arrow-up-right": '<path d="M7 17 17 7"/><path d="M7 7h10v10"/>',
+      "bar-chart-3": '<path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>',
+      "check-circle-2": '<path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"/><path d="m9 12 2 2 4-4"/>',
+      "cpu": '<rect width="16" height="16" x="4" y="4" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3"/><path d="M15 1v3"/><path d="M9 20v3"/><path d="M15 20v3"/><path d="M20 9h3"/><path d="M20 14h3"/><path d="M1 9h3"/><path d="M1 14h3"/>',
+      "database-zap": '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3"/><path d="M4 11v6c0 1.7 3.6 3 8 3"/><path d="m17 10-3 5h4l-3 5"/>',
+      "external-link": '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
+      "graduation-cap": '<path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/><path d="M22 10v6"/>',
+      "layout-template": '<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>',
+      "menu": '<path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/>',
+      "message-circle": '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
+      "mouse-pointer-click": '<path d="m9 9 5 12 2-5 5-2Z"/><path d="M7.2 2.2 8 5.1"/><path d="M2.2 7.2 5.1 8"/><path d="m14 4 1.9-1.9"/><path d="m4 14-1.9 1.9"/>',
+      "panels-top-left": '<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>',
+      "phone": '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6.3 6.3l1.3-1.3a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2.1Z"/>',
+      "phone-call": '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6.3 6.3l1.3-1.3a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2.1Z"/><path d="M14 2a6 6 0 0 1 6 6"/><path d="M14 6a2 2 0 0 1 2 2"/>',
+      "rocket": '<path d="M4.5 16.5c-1.5 1.3-2 3.5-2 3.5s2.2-.5 3.5-2c.8-.9.8-2.2 0-3-.8-.8-2.1-.8-3 .5Z"/><path d="m9 15-4-4 6-6c3-3 7-3 9-2-1 2-1 6-4 9l-6 6Z"/><path d="M15 9h.01"/>',
+      "scan-search": '<path d="M7 3H5a2 2 0 0 0-2 2v2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M17 21h2a2 2 0 0 0 2-2v-2"/><circle cx="11" cy="11" r="3"/><path d="m16 16-2.1-2.1"/>',
+      "send": '<path d="m22 2-7 20-4-9-9-4 20-7Z"/><path d="M22 2 11 13"/>',
+      "shield-check": '<path d="M20 13c0 5-3.5 7.5-7.7 8.9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.5a1.3 1.3 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/>',
+      "shopping-bag": '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
+      "smartphone": '<rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/>',
+      "sparkles": '<path d="M12 3 10 9l-6 2 6 2 2 6 2-6 6-2-6-2-2-6Z"/><path d="M19 3v4"/><path d="M21 5h-4"/><path d="M5 17v2"/><path d="M6 18H4"/>',
+      "user": '<path d="M19 21a7 7 0 0 0-14 0"/><circle cx="12" cy="7" r="4"/>',
+      "workflow": '<rect width="8" height="8" x="3" y="3" rx="2"/><rect width="8" height="8" x="13" y="13" rx="2"/><path d="M7 11v2a4 4 0 0 0 4 4h2"/><path d="M14 7h3a3 3 0 0 1 3 3v3"/>',
+      "x": '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>'
+    };
+
+    function iconSvg(name) {
+      return `<svg class="lucide lucide-${name}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${iconPaths[name] || ""}</svg>`;
+    }
+
+    function createIcons(root = document) {
+      root.querySelectorAll("[data-lucide]").forEach((element) => {
+        const name = element.getAttribute("data-lucide");
+        element.outerHTML = iconSvg(name);
+      });
+    }
+
+    function setButtonIcon(button, name) {
+      const icon = button?.querySelector("svg");
+      if (icon) icon.outerHTML = iconSvg(name);
+    }
+
+    window.lucide = { createIcons };
+    createIcons();
+
+    const navLinks = document.querySelector("#navLinks");
+    const menuButton = document.querySelector("#menuButton");
+    const navAnchors = [...document.querySelectorAll(".nav-links a")];
+
+    menuButton?.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      setButtonIcon(menuButton, isOpen ? "x" : "menu");
+    });
+
+    navAnchors.forEach((anchor) => {
+      anchor.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton?.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    document.querySelectorAll(".reveal, .about-panel").forEach((element, index) => {
+      element.style.transitionDelay = `${Math.min(index % 6, 5) * 60}ms`;
+      revealObserver.observe(element);
+    });
+
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = Number(el.dataset.count);
+        const suffix = target === 100 ? "%" : "";
+        let current = 0;
+        const steps = 42;
+        const increment = target / steps;
+        const tick = () => {
+          current += increment;
+          if (current >= target) {
+            el.textContent = `${target}${suffix}`;
+            return;
+          }
+          el.textContent = `${Math.round(current)}${suffix}`;
+          requestAnimationFrame(tick);
+        };
+        tick();
+        countObserver.unobserve(el);
+      });
+    }, { threshold: 0.6 });
+
+    document.querySelectorAll("[data-count]").forEach((el) => countObserver.observe(el));
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        navAnchors.forEach((anchor) => {
+          anchor.classList.toggle("active", anchor.getAttribute("href") === `#${id}`);
+        });
+      });
+    }, { rootMargin: "-35% 0px -55% 0px", threshold: 0.01 });
+
+    document.querySelectorAll("main section[id]").forEach((section) => sectionObserver.observe(section));
+
+    document.querySelectorAll("[data-tilt]").forEach((card) => {
+      if (prefersReduced || window.innerWidth < 820) return;
+      card.addEventListener("pointermove", (event) => {
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(900px) rotateX(${(-y * 5).toFixed(2)}deg) rotateY(${(x * 7).toFixed(2)}deg) translateY(-4px)`;
+      });
+      card.addEventListener("pointerleave", () => {
+        card.style.transform = "";
+      });
+    });
+
+    const canvas = document.querySelector("#hero-canvas");
+    const ctx = canvas.getContext("2d");
+    let width = 0;
+    let height = 0;
+    let points = [];
+    const pointer = { x: 0, y: 0, active: false };
+
+    function resizeCanvas() {
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      width = canvas.offsetWidth;
+      height = canvas.offsetHeight;
+      canvas.width = Math.floor(width * ratio);
+      canvas.height = Math.floor(height * ratio);
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      const amount = Math.max(42, Math.min(92, Math.floor(width / 18)));
+      points = Array.from({ length: amount }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.32,
+        vy: (Math.random() - 0.5) * 0.32,
+        size: Math.random() * 1.6 + 0.9
+      }));
+    }
+
+    function drawCanvas() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "rgba(2, 7, 19, 0.22)";
+      ctx.fillRect(0, 0, width, height);
+
+      for (let i = 0; i < points.length; i++) {
+        const p = points[i];
+        if (!prefersReduced) {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > width) p.vx *= -1;
+          if (p.y < 0 || p.y > height) p.vy *= -1;
+        }
+
+        for (let j = i + 1; j < points.length; j++) {
+          const q = points[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < 132) {
+            const alpha = (1 - distance / 132) * 0.22;
+            ctx.strokeStyle = `rgba(56, 212, 255, ${alpha})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.stroke();
+          }
+        }
+
+        if (pointer.active) {
+          const dx = p.x - pointer.x;
+          const dy = p.y - pointer.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < 190) {
+            ctx.strokeStyle = `rgba(66, 242, 196, ${(1 - distance / 190) * 0.32})`;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(pointer.x, pointer.y);
+            ctx.stroke();
+          }
+        }
+
+        ctx.fillStyle = "rgba(184, 235, 255, 0.72)";
+        ctx.fillRect(p.x - p.size / 2, p.y - p.size / 2, p.size, p.size);
+      }
+
+      if (!prefersReduced) {
+        requestAnimationFrame(drawCanvas);
+      }
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener("pointermove", (event) => {
+      pointer.x = event.clientX;
+      pointer.y = event.clientY;
+      pointer.active = true;
+    }, { passive: true });
+    window.addEventListener("pointerleave", () => {
+      pointer.active = false;
+    });
+
+    resizeCanvas();
+    drawCanvas();
+  </script>
+</body>
 </html>
